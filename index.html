@@ -5,114 +5,178 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090b16">
-<meta name="description" content="GameZone: descubrí juegos para PC, filtrá por género y visitá sus páginas oficiales.">
-<title>GameZone | Juegos para PC</title>
+<meta name="description" content="GameZone: juegos para PC y accesorios gamer.">
+<title>GameZone | Juegos y accesorios gamer</title>
 <style>
 :root{--bg:#090b16;--panel:#11162a;--text:#f4f6ff;--muted:#aab2d1;--purple:#8b5cf6;--cyan:#36d9ff;--line:#293253;--green:#70f0b0}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(ellipse at 15% 0%,#20204c,transparent 36%),radial-gradient(ellipse at 95% 15%,#102e46,transparent 30%),var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
+body{margin:0;background:radial-gradient(ellipse at 15% 0%,#20204c,transparent 36%),radial-gradient(ellipse at 95% 15%,#102e46,transparent 30%),var(--bg);color:var(--text);font-family:system-ui,Arial,sans-serif;min-height:100vh}
 a{color:inherit}
 .wrap{width:min(1240px,calc(100% - 32px));margin:auto}
 .topbar{position:sticky;top:0;z-index:10;background:#090b16ef;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff12}
-.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-size:1.45rem;font-weight:950;letter-spacing:-.8px;text-decoration:none}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-size:1.4rem;font-weight:950;text-decoration:none}
 .brand span{color:var(--cyan)}
-.navnote{font-size:.82rem;color:var(--muted)}
-.hero{padding:58px 0 32px}
-.eyebrow{display:inline-flex;border:1px solid #8b5cf655;border-radius:999px;padding:7px 12px;color:#d6c8ff;background:#8b5cf618;font-size:.8rem;font-weight:700}
-.hero h1{font-size:clamp(2.3rem,6vw,4.7rem);line-height:1.02;letter-spacing:-2.5px;margin:18px 0 14px;max-width:850px}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}
+.navlinks a{text-decoration:none;color:var(--muted);font-size:.88rem}
+.navlinks a:hover{color:var(--cyan)}
+.hero{padding:55px 0 30px}
+.eyebrow{display:inline-block;border:1px solid #8b5cf655;border-radius:999px;padding:7px 12px;color:#d6c8ff;background:#8b5cf618;font-size:.8rem;font-weight:700}
+h1{font-size:clamp(2.3rem,6vw,4.6rem);line-height:1.04;letter-spacing:-2px;margin:18px 0 14px}
 .gradient{background:linear-gradient(90deg,#a78bfa,#36d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{max-width:690px;color:var(--muted);font-size:1.05rem;line-height:1.7}
-.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.stat{padding:9px 13px;background:#ffffff08;border:1px solid #ffffff14;border-radius:12px;font-size:.88rem;color:#dce3ff}
-.stat strong{color:white}
+.hero p,.sectionintro{max-width:700px;color:var(--muted);line-height:1.7}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.stat{padding:9px 13px;background:#ffffff08;border:1px solid #ffffff14;border-radius:12px;font-size:.86rem}
 .tools{background:#11162ae8;border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:12px;margin:12px 0 24px}
-.field label{display:block;color:var(--muted);font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
-.field input,.field select{width:100%;background:#090d1c;border:1px solid #303958;color:var(--text);padding:13px 12px;border-radius:11px;font:inherit;outline:none}
-.field input:focus,.field select:focus{border-color:var(--cyan)}
-.resultsline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0 15px;color:var(--muted);font-size:.9rem}
-.resultsline strong{color:white}
+.field label{display:block;color:var(--muted);font-size:.75rem;font-weight:800;text-transform:uppercase;margin-bottom:7px}
+.field input,.field select{width:100%;background:#090d1c;border:1px solid #303958;color:var(--text);padding:13px 12px;border-radius:11px;font:inherit}
+.resultsline{display:flex;justify-content:space-between;gap:12px;margin:10px 0 15px;color:var(--muted);font-size:.9rem}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.game{min-width:0;overflow:hidden;background:linear-gradient(155deg,#171d35,#0e1223);border:1px solid #ffffff14;border-radius:16px;transition:transform .18s,border-color .18s;display:flex;flex-direction:column}
-.game:hover{transform:translateY(-4px);border-color:#8b5cf677}
-.cover{height:155px;position:relative;background:linear-gradient(135deg,#292052,#16465c);overflow:hidden}
+.game,.accessory{min-width:0;overflow:hidden;background:linear-gradient(155deg,#171d35,#0e1223);border:1px solid #ffffff14;border-radius:16px;display:flex;flex-direction:column}
+.game:hover,.accessory:hover{border-color:#8b5cf677}
+.cover{height:150px;position:relative;background:linear-gradient(135deg,#292052,#16465c);overflow:hidden}
 .cover img{width:100%;height:100%;object-fit:cover;display:block}
-.cover:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#0e1223);pointer-events:none}
-.pill{position:absolute;z-index:1;top:10px;left:10px;border:1px solid #ffffff25;background:#090b16d9;padding:5px 8px;border-radius:7px;font-size:.68rem;font-weight:800}
+.pill{position:absolute;top:10px;left:10px;background:#090b16e8;border:1px solid #ffffff25;padding:5px 8px;border-radius:7px;font-size:.65rem;font-weight:800}
 .cardbody{padding:14px;display:flex;flex-direction:column;flex:1}
-.cardbody h2{font-size:1.02rem;margin:0 0 7px;line-height:1.3}
+.cardbody h3{font-size:1rem;margin:0 0 7px}
 .genre{color:var(--cyan);font-size:.74rem;font-weight:800;margin-bottom:9px}
 .desc{font-size:.82rem;line-height:1.5;color:var(--muted);margin:0 0 12px;flex:1}
 .price{font-size:.74rem;color:#c7d0ef;margin-bottom:12px}
 .price b{color:var(--green)}
 .btn{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:linear-gradient(95deg,#7952e8,#286bd6);color:white;font-weight:850;font-size:.82rem;border-radius:10px;padding:11px 12px;min-height:41px}
-.btn:hover{filter:brightness(1.16)}
-.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:38px;text-align:center;color:var(--muted)}
-.disclaimer{margin:28px 0 0;border:1px solid #ffffff14;background:#ffffff06;border-radius:15px;padding:16px;color:var(--muted);font-size:.83rem;line-height:1.65}
-.disclaimer strong{color:#fff}
+.btn:hover{filter:brightness(1.15)}
+.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:35px;text-align:center;color:var(--muted)}
+.section{padding-top:44px}
+.section h2{font-size:clamp(1.8rem,4vw,2.8rem);margin:13px 0 6px;letter-spacing:-1px}
+.accessorygrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.accessoryicon{height:100px;display:grid;place-items:center;font-size:2.8rem;background:radial-gradient(circle at 50% 40%,#353066,#101b32)}
+.accessorybody{padding:16px;display:flex;flex-direction:column;flex:1}
+.accessorybody h3{margin:0 0 8px}
+.accessorybody p{color:var(--muted);font-size:.84rem;line-height:1.55;flex:1}
+.notice{margin-top:22px;border:1px solid #ffffff14;background:#ffffff06;border-radius:15px;padding:16px;color:var(--muted);font-size:.83rem;line-height:1.65}
+.notice strong{color:white}
 .footer{padding:30px 0 42px;color:#858eae;font-size:.8rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.hidden{display:none!important}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:720px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tools{grid-template-columns:1fr 1fr}.field:first-child{grid-column:1/-1}.hero{padding-top:38px}.cover{height:130px}.cardbody{padding:11px}.cardbody h2{font-size:.94rem}.desc{font-size:.78rem}.navnote{display:none}}
-@media(max-width:430px){.wrap{width:calc(100% - 20px)}.grid{gap:8px}.cover{height:105px}.pill{font-size:.61rem;left:6px;top:6px;padding:4px 6px}.cardbody{padding:9px}.cardbody h2{font-size:.87rem}.desc{font-size:.74rem}.btn{font-size:.75rem;padding:9px 7px}.tools{padding:11px;gap:9px}.hero h1{letter-spacing:-1.5px}}
+@media(max-width:720px){.grid,.accessorygrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tools{grid-template-columns:1fr 1fr}.field:first-child{grid-column:1/-1}.hero{padding-top:35px}.cover{height:125px}.cardbody{padding:10px}.nav{align-items:flex-start;padding:15px 0}.navlinks{justify-content:flex-end}}
+@media(max-width:430px){.wrap{width:calc(100% - 20px)}.grid,.accessorygrid{gap:8px}.cover{height:100px}.cardbody{padding:9px}.cardbody h3{font-size:.88rem}.desc{font-size:.75rem}.btn{font-size:.73rem;padding:9px 6px}.accessorybody{padding:10px}.accessoryicon{height:75px}.navlinks{gap:10px}.navlinks a{font-size:.78rem}}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="wrap nav">
     <a class="brand" href="#inicio">GAME<span>ZONE</span> 🎮</a>
-    <div class="navnote">Encontrá tu próximo juego favorito</div>
+    <nav class="navlinks">
+      <a href="#juegos">Juegos</a>
+      <a href="#accesorios">Accesorios gamer</a>
+    </nav>
   </div>
 </header>
 
 <main class="wrap" id="inicio">
 <section class="hero">
-  <div class="eyebrow">✦ CATÁLOGO PARA PC</div>
-  <h1>Tu próxima aventura<br><span class="gradient">empieza acá.</span></h1>
-  <p>Explorá juegos de acción, mundo abierto, terror, carreras, RPG y mucho más. Buscá por nombre, elegí un género y entrá a la página oficial para conocerlo o descargarlo.</p>
+  <div class="eyebrow">✦ TU ZONA GAMER</div>
+  <h1>Jugá más.<br><span class="gradient">Descubrí tu próximo juego.</span></h1>
+  <p>Encontrá juegos para PC, explorá diferentes géneros y conocé tiendas de accesorios para armar tu setup.</p>
   <div class="stats">
-    <div class="stat"><strong id="totalCount">52</strong> juegos en el catálogo</div>
-    <div class="stat">🆓 Muchos títulos gratis</div>
-    <div class="stat">🔗 Enlaces oficiales</div>
+    <div class="stat"><strong id="totalCount">52</strong> juegos</div>
+    <div class="stat">🎮 Seis categorías</div>
+    <div class="stat">🖱️ Accesorios gamer</div>
   </div>
 </section>
 
-<section class="tools" aria-label="Buscar y filtrar juegos">
-  <div class="field">
-    <label for="search">Buscar juego</label>
-    <input id="search" type="search" placeholder="Ej.: Warframe, carreras, RPG…" autocomplete="off">
+<section id="juegos">
+  <div class="tools">
+    <div class="field">
+      <label for="search">Buscar juego</label>
+      <input id="search" type="search" placeholder="Nombre, género o palabra clave">
+    </div>
+    <div class="field">
+      <label for="genreFilter">Género</label>
+      <select id="genreFilter">
+        <option value="all">Todos los géneros</option>
+        <option>Acción y disparos</option>
+        <option>Mundo abierto</option>
+        <option>Supervivencia y terror</option>
+        <option>Carreras y deportes</option>
+        <option>Aventura y RPG</option>
+        <option>Estrategia y otros</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="priceFilter">Compras</label>
+      <select id="priceFilter">
+        <option value="all">Todos los juegos</option>
+        <option value="optional">Con compras o contenido pago</option>
+        <option value="none">Marcados como gratis sin compras</option>
+      </select>
+    </div>
   </div>
-  <div class="field">
-    <label for="genreFilter">Género</label>
-    <select id="genreFilter">
-      <option value="all">Todos los géneros</option>
-      <option>Acción y disparos</option>
-      <option>Mundo abierto</option>
-      <option>Supervivencia y terror</option>
-      <option>Carreras y deportes</option>
-      <option>Aventura y RPG</option>
-      <option>Estrategia y otros</option>
-    </select>
+  <div class="resultsline"><span id="resultsText">Cargando juegos…</span><span>Enlaces externos oficiales</span></div>
+  <div class="grid" id="gamesGrid"></div>
+</section>
+
+<section class="section" id="accesorios">
+  <div class="eyebrow">✦ EQUIPÁ TU SETUP</div>
+  <h2>Accesorios <span class="gradient">gamer</span></h2>
+  <p class="sectionintro">Explorá tiendas con teclados, mouse, auriculares, micrófonos, mousepads y combos.</p>
+  <div class="accessorygrid">
+    <article class="accessory">
+      <div class="accessoryicon">⌨️</div>
+      <div class="accessorybody">
+        <h3>Teclados gamer</h3>
+        <p>Teclados mecánicos, compactos y con iluminación RGB.</p>
+        <a class="btn" href="https://www.havitgaming.com.ar/productos/" target="_blank" rel="noopener noreferrer">Ver en Havit Gaming ↗</a>
+      </div>
+    </article>
+    <article class="accessory">
+      <div class="accessoryicon">🖱️</div>
+      <div class="accessorybody">
+        <h3>Mouse gamer</h3>
+        <p>Modelos con cable o inalámbricos para distintos estilos de juego.</p>
+        <a class="btn" href="https://www.logitechargentina.com.ar/" target="_blank" rel="noopener noreferrer">Ver en Logitech Store ↗</a>
+      </div>
+    </article>
+    <article class="accessory">
+      <div class="accessoryicon">🎧</div>
+      <div class="accessorybody">
+        <h3>Auriculares</h3>
+        <p>Auriculares con micrófono para jugar y hablar con tu equipo.</p>
+        <a class="btn" href="https://netgaming.ar/accesorios/" target="_blank" rel="noopener noreferrer">Ver en NET Gaming ↗</a>
+      </div>
+    </article>
+    <article class="accessory">
+      <div class="accessoryicon">🎙️</div>
+      <div class="accessorybody">
+        <h3>Micrófonos y streaming</h3>
+        <p>Opciones para comunicarte en partidas o grabar contenido.</p>
+        <a class="btn" href="https://www.melonstore.com.ar/accesorios-gaming/" target="_blank" rel="noopener noreferrer">Ver en Melon Store ↗</a>
+      </div>
+    </article>
+    <article class="accessory">
+      <div class="accessoryicon">🧩</div>
+      <div class="accessorybody">
+        <h3>Mousepads y accesorios</h3>
+        <p>Superficies y complementos para tu espacio gamer.</p>
+        <a class="btn" href="https://netgaming.ar/accesorios/" target="_blank" rel="noopener noreferrer">Explorar accesorios ↗</a>
+      </div>
+    </article>
+    <article class="accessory">
+      <div class="accessoryicon">🎮</div>
+      <div class="accessorybody">
+        <h3>Combos gamer</h3>
+        <p>Buscá kits con teclado, mouse y otros periféricos.</p>
+        <a class="btn" href="https://www.dotpixstore.com.ar/gaming/" target="_blank" rel="noopener noreferrer">Ver combos y productos ↗</a>
+      </div>
+    </article>
   </div>
-  <div class="field">
-    <label for="priceFilter">Precio</label>
-    <select id="priceFilter">
-      <option value="all">Todos</option>
-      <option value="free">Gratis para jugar</option>
-      <option value="optional">Con compras opcionales</option>
-    </select>
+  <div class="notice">
+    <strong>Importante:</strong> estos son enlaces normales a tiendas, no enlaces de afiliado. GameZone no recibe comisiones por estas visitas o compras. Los precios, el stock y los envíos pueden cambiar; revisá las condiciones en cada tienda.
   </div>
 </section>
 
-<div class="resultsline">
-  <span id="resultsText">Mostrando 52 juegos</span>
-  <span>Actualizá los filtros cuando quieras</span>
-</div>
-<section class="grid" id="gamesGrid" aria-live="polite"></section>
-
-<div class="disclaimer">
-  <strong>ℹ️ Sobre el precio:</strong> “Gratis para jugar” significa que el juego base se puede jugar sin comprarlo, aunque algunos ofrecen compras opcionales, pases, monedas virtuales, expansiones o suscripciones. Las condiciones pueden cambiar por región y con el tiempo. Revisá el precio y los requisitos en la página oficial antes de descargar. GameZone es un catálogo independiente y no está afiliado a los desarrolladores.
+<div class="notice">
+  <strong>Sobre los juegos:</strong> los títulos gratuitos pueden incluir compras opcionales, expansiones, pases o monedas virtuales. Verificá el precio, los requisitos y la disponibilidad regional en la página oficial antes de descargar.
 </div>
 </main>
 
@@ -123,7 +187,6 @@ a{color:inherit}
 
 <script>
 const games = [
-/* LOS 12 JUEGOS ORIGINALES */
 {n:'Warframe',g:'Acción y disparos',id:230410,u:'https://www.warframe.com/',d:'Acción cooperativa de ciencia ficción, misiones y personalización.',p:'Compras opcionales'},
 {n:'The Sims 4',g:'Estrategia y otros',id:1222670,u:'https://www.ea.com/games/the-sims/the-sims-4',d:'Creá personajes, construí casas y armá historias.',p:'Compras opcionales y expansiones'},
 {n:'Brawlhalla',g:'Acción y disparos',id:291550,u:'https://www.brawlhalla.com/',d:'Combates de plataformas gratuitos para jugar con amigos.',p:'Compras opcionales'},
@@ -137,9 +200,6 @@ const games = [
 {n:'Counter-Strike 2',g:'Acción y disparos',id:730,u:'https://www.counter-strike.net/cs2',d:'Shooter táctico competitivo por rondas.',p:'Compras opcionales'},
 {n:'PUBG: Battlegrounds',g:'Acción y disparos',id:578080,u:'https://pubg.com/',d:'Supervivencia competitiva en grandes mapas.',p:'Compras opcionales'},
 
-/* 40 JUEGOS NUEVOS */
-
-/* ACCIÓN Y DISPAROS */
 {n:'Overwatch',g:'Acción y disparos',id:2357570,u:'https://overwatch.blizzard.com/',d:'Shooter por equipos con héroes y objetivos variados.',p:'Compras opcionales'},
 {n:'THE FINALS',g:'Acción y disparos',id:2073850,u:'https://www.reachthefinals.com/',d:'Combates rápidos en escenarios destructibles.',p:'Compras opcionales'},
 {n:'War Thunder',g:'Acción y disparos',id:236390,u:'https://warthunder.com/',d:'Combates vehiculares con aviones, tanques y barcos.',p:'Compras opcionales'},
@@ -148,14 +208,12 @@ const games = [
 {n:'Call of Duty: Warzone',g:'Acción y disparos',id:1962663,u:'https://www.callofduty.com/warzone',d:'Combate de supervivencia en mapas de gran escala.',p:'Compras opcionales'},
 {n:'Paladins',g:'Acción y disparos',id:444090,u:'https://www.paladins.com/',d:'Shooter de fantasía con campeones y habilidades.',p:'Compras opcionales'},
 
-/* MUNDO ABIERTO */
 {n:'Once Human',g:'Mundo abierto',id:2139460,u:'https://www.oncehuman.game/',d:'Supervivencia de mundo abierto en un entorno extraño.',p:'Compras opcionales'},
 {n:'Palia',g:'Mundo abierto',id:2707930,u:'https://palia.com/',d:'Aventura tranquila con exploración, pesca y construcción.',p:'Compras cosméticas opcionales'},
 {n:'Albion Online',g:'Mundo abierto',id:761890,u:'https://albiononline.com/',d:'MMORPG sandbox con economía y exploración.',p:'Compras opcionales; membresía premium'},
 {n:'Guild Wars 2',g:'Mundo abierto',id:1284210,u:'https://www.guildwars2.com/',d:'MMORPG de fantasía con exploración y eventos dinámicos.',p:'Expansiones pagas y compras opcionales'},
 {n:'Star Wars: The Old Republic',g:'Mundo abierto',id:1286830,u:'https://www.swtor.com/',d:'Aventura online de Star Wars centrada en historias.',p:'Suscripción y contenido opcionales'},
 
-/* SUPERVIVENCIA Y TERROR */
 {n:'Unturned',g:'Supervivencia y terror',id:304930,u:'https://store.steampowered.com/app/304930/Unturned/',d:'Supervivencia de mundo abierto con zombis y construcción.',p:'Compras opcionales'},
 {n:'SCP: Secret Laboratory',g:'Supervivencia y terror',id:700330,u:'https://scpslgame.com/',d:'Multijugador de terror y escape en una instalación.',p:'Gratis; elementos opcionales según plataforma'},
 {n:'No More Room in Hell',g:'Supervivencia y terror',id:224260,u:'https://store.steampowered.com/app/224260/No_More_Room_in_Hell/',d:'Supervivencia cooperativa de terror contra zombis.',p:'Gratis'},
@@ -163,7 +221,6 @@ const games = [
 {n:'Muck',g:'Supervivencia y terror',id:1625450,u:'https://store.steampowered.com/app/1625450/Muck/',d:'Supervivencia roguelike con recolección y fabricación.',p:'Gratis'},
 {n:'Project Playtime',g:'Supervivencia y terror',id:1961460,u:'https://store.steampowered.com/app/1961460/PROJECT_PLAYTIME/',d:'Terror multijugador con persecuciones y rompecabezas.',p:'Gratis; compras opcionales'},
 
-/* CARRERAS Y DEPORTES */
 {n:'eFootball',g:'Carreras y deportes',id:1665460,u:'https://www.konami.com/efootball/',d:'Fútbol digital con equipos y modos online.',p:'Compras opcionales'},
 {n:'Trackmania',g:'Carreras y deportes',id:2225070,u:'https://www.trackmania.com/',d:'Carreras arcade y circuitos creados por la comunidad.',p:'Acceso básico gratis; suscripciones opcionales'},
 {n:'RaceRoom Racing Experience',g:'Carreras y deportes',id:211500,u:'https://game.raceroom.com/',d:'Simulación de carreras con autos y circuitos.',p:'Contenido adicional pago'},
@@ -171,7 +228,6 @@ const games = [
 {n:'Fishing Planet',g:'Carreras y deportes',id:380600,u:'https://fishingplanet.com/',d:'Simulador de pesca con lugares y equipos variados.',p:'Compras opcionales'},
 {n:'Fall Guys',g:'Carreras y deportes',id:0,u:'https://www.fallguys.com/',d:'Competencias de obstáculos coloridas y partidas multijugador.',p:'Compras opcionales'},
 
-/* AVENTURA Y RPG */
 {n:'Genshin Impact',g:'Aventura y RPG',id:0,u:'https://genshin.hoyoverse.com/',d:'RPG de acción en un mundo abierto de fantasía.',p:'Compras opcionales'},
 {n:'Honkai: Star Rail',g:'Aventura y RPG',id:0,u:'https://hsr.hoyoverse.com/',d:'RPG por turnos con aventura espacial.',p:'Compras opcionales'},
 {n:'Zenless Zone Zero',g:'Aventura y RPG',id:3228590,u:'https://zenless.hoyoverse.com/',d:'RPG de acción con combates ágiles y estilo urbano.',p:'Compras opcionales'},
@@ -180,7 +236,6 @@ const games = [
 {n:'Star Trek Online',g:'Aventura y RPG',id:9900,u:'https://www.playstartrekonline.com/',d:'Aventura online de ciencia ficción en el universo Star Trek.',p:'Compras opcionales'},
 {n:'Trove',g:'Aventura y RPG',id:304050,u:'https://www.trionworlds.com/trove/',d:'Aventura online con mundos cúbicos y creación.',p:'Compras opcionales'},
 
-/* ESTRATEGIA Y OTROS */
 {n:'Magic: The Gathering Arena',g:'Estrategia y otros',id:2141910,u:'https://magic.wizards.com/en/mtgarena',d:'Juego de cartas estratégico con mazos personalizables.',p:'Compras opcionales'},
 {n:'Yu-Gi-Oh! Master Duel',g:'Estrategia y otros',id:1449850,u:'https://www.konami.com/yugioh/masterduel/',d:'Duelo de cartas con miles de cartas para coleccionar.',p:'Compras opcionales'},
 {n:'Hearthstone',g:'Estrategia y otros',id:0,u:'https://hearthstone.blizzard.com/',d:'Juego de cartas con partidas estratégicas rápidas.',p:'Compras opcionales'},
@@ -189,7 +244,7 @@ const games = [
 {n:'Goose Goose Duck',g:'Estrategia y otros',id:1568590,u:'https://www.goosegooseduck.com/',d:'Juego social de deducción, roles secretos y trabajo en equipo.',p:'Compras opcionales'},
 {n:'VRChat',g:'Estrategia y otros',id:438100,u:'https://hello.vrchat.com/',d:'Mundos sociales creados por la comunidad; no requiere VR para entrar.',p:'Compras opcionales'},
 {n:'Rec Room',g:'Estrategia y otros',id:471710,u:'https://recroom.com/',d:'Espacios sociales y minijuegos creados por usuarios.',p:'Compras opcionales'},
-{n:'World of Tanks',g:'Estrategia y otros',id:1407200,u:'https://worldoftanks.com/',d:'Combates multijugador con vehículos blindados y estrategia por equipos.',p:'Compras opcionales'}
+{n:'World of Tanks',g:'Estrategia y otros',id:1407200,u:'https://worldoftanks.com/',d:'Combates multijugador con vehículos y estrategia por equipos.',p:'Compras opcionales'}
 ];
 
 const grid=document.getElementById('gamesGrid');
@@ -202,6 +257,10 @@ function imageUrl(game){
   return game.id ? `https://cdn.akamai.steamstatic.com/steam/apps/${game.id}/header.jpg` : '';
 }
 
+function hasPaidExtras(game){
+  return /opcional|expansiones|suscripción|contenido adicional|campaña paga|membresía premium/i.test(game.p);
+}
+
 function render(){
   const q=search.value.trim().toLocaleLowerCase('es');
   const selectedGenre=genre.value;
@@ -210,14 +269,13 @@ function render(){
   const filtered=games.filter(x=>{
     const matchesText=!q||(x.n+' '+x.g+' '+x.d).toLocaleLowerCase('es').includes(q);
     const matchesGenre=selectedGenre==='all'||x.g===selectedGenre;
-    const hasOptional=/opcional|expansiones|suscripción|contenido adicional|pago/i.test(x.p);
     const matchesPrice=selectedPrice==='all'||
-      (selectedPrice==='free'&&!hasOptional)||
-      (selectedPrice==='optional'&&hasOptional);
+      (selectedPrice==='optional'&&hasPaidExtras(x))||
+      (selectedPrice==='none'&&!hasPaidExtras(x));
     return matchesText&&matchesGenre&&matchesPrice;
   });
 
-  results.innerHTML=`Mostrando <strong>${filtered.length}</strong> de <strong>${games.length}</strong> juegos`;
+  results.textContent=`Mostrando ${filtered.length} de ${games.length} juegos`;
   grid.innerHTML='';
 
   if(!filtered.length){
@@ -228,45 +286,36 @@ function render(){
   for(const x of filtered){
     const card=document.createElement('article');
     card.className='game';
-
     const cover=document.createElement('div');
     cover.className='cover';
 
-    const img=imageUrl(x);
-    if(img){
-      const image=document.createElement('img');
-      image.src=img;
-      image.alt='Imagen de '+x.n;
-      image.loading='lazy';
-      image.onerror=()=>image.remove();
-      cover.appendChild(image);
+    if(x.id){
+      const img=document.createElement('img');
+      img.src=imageUrl(x);
+      img.alt='Imagen de '+x.n;
+      img.loading='lazy';
+      img.onerror=()=>img.remove();
+      cover.appendChild(img);
     }
 
     const pill=document.createElement('span');
     pill.className='pill';
-    pill.textContent='PC · GRATIS PARA JUGAR';
+    pill.textContent='PC · FREE TO PLAY';
     cover.appendChild(pill);
 
     const body=document.createElement('div');
     body.className='cardbody';
-
-    const h=document.createElement('h2');
-    h.textContent=x.n;
-
+    const title=document.createElement('h3');
+    title.textContent=x.n;
     const g=document.createElement('div');
     g.className='genre';
     g.textContent=x.g;
-
     const d=document.createElement('p');
     d.className='desc';
     d.textContent=x.d;
-
     const p=document.createElement('div');
     p.className='price';
-    const bold=document.createElement('b');
-    bold.textContent='Precio: ';
-    p.append(bold,document.createTextNode(x.p));
-
+    p.textContent='Precio: '+x.p;
     const a=document.createElement('a');
     a.className='btn';
     a.href=x.u;
@@ -274,7 +323,7 @@ function render(){
     a.rel='noopener noreferrer';
     a.textContent='Página oficial ↗';
 
-    body.append(h,g,d,p,a);
+    body.append(title,g,d,p,a);
     card.append(cover,body);
     grid.appendChild(card);
   }
