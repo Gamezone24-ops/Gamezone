@@ -3,68 +3,437 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GameZone - Tienda de videojuegos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GameZone | Juegos gratis para PC</title>
+
 <style>
-body{margin:0;background:#0b0d12;color:white;font-family:Arial,sans-serif}
-header{padding:22px 7%;border-bottom:1px solid #303747;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.logo{font-size:30px;font-weight:bold}.logo span{color:#08c9ff}
-input{padding:12px;border-radius:8px;background:#171b25;color:white;border:1px solid #343747}
-main{padding:30px 7%}
-.hero{padding:35px;background:linear-gradient(120deg,#12345b,#171b25);border-radius:15px}
-h1{font-size:35px}.blue{color:#08c9ff}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:22px}
-.game{background:#171b25;border:1px solid #303747;padding:17px;border-radius:12px}
-.cover{height:125px;display:grid;place-items:center;font-size:55px;background:linear-gradient(135deg,#123f65,#25203f);border-radius:8px}
-.price{color:#08c9ff;font-weight:bold}
-button{background:#0788d1;color:white;border:0;border-radius:7px;padding:11px;cursor:pointer}
-footer{text-align:center;padding:30px;color:#aab3c2}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #090c12;
+  color: #f4f7ff;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 20px 6%;
+  background: #101620;
+  border-bottom: 1px solid #263449;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.logo span {
+  color: #00c8ff;
+}
+
+input, select {
+  background: #171f2c;
+  color: white;
+  border: 1px solid #35445a;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+}
+
+input {
+  width: 260px;
+  max-width: 100%;
+}
+
+main {
+  max-width: 1400px;
+  margin: auto;
+  padding: 30px 6%;
+}
+
+.hero {
+  padding: 42px 30px;
+  border-radius: 18px;
+  background: linear-gradient(120deg, #103b69, #15162a 75%);
+  border: 1px solid #17538a;
+  margin-bottom: 30px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px);
+  margin: 0 0 14px;
+}
+
+.hero p {
+  color: #d0d9e9;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: #00c8ff;
+}
+
+.section-title {
+  margin-top: 30px;
+  margin-bottom: 8px;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.games {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 22px;
+}
+
+.game {
+  background: #121925;
+  border: 1px solid #29364a;
+  border-radius: 13px;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+
+.game:hover {
+  transform: translateY(-4px);
+  border-color: #00bfff;
+}
+
+.game img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 460 / 215;
+  object-fit: cover;
+  background: #202b3b;
+}
+
+.game-content {
+  padding: 16px;
+}
+
+.game h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+}
+
+.genre {
+  display: inline-block;
+  font-size: 12px;
+  color: #8edfff;
+  background: #12334a;
+  padding: 5px 9px;
+  border-radius: 20px;
+}
+
+.description {
+  color: #b6c1d2;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 42px;
+}
+
+.price {
+  color: #58e6a5;
+  font-weight: bold;
+  margin: 14px 0;
+}
+
+.button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background: #087fc4;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.button:hover {
+  background: #00a5ef;
+}
+
+.no-results {
+  display: none;
+  color: #bac7d9;
+  padding: 25px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 15px;
+  margin-top: 45px;
+  border-top: 1px solid #263449;
+  color: #8d9bb0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 18px 5%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  main {
+    padding: 22px 5%;
+  }
+
+  .hero {
+    padding: 28px 20px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<div class="logo">Game<span>Zone</span> 🎮</div>
-<input id="search" placeholder="Buscar juegos...">
+  <div class="logo">Game<span>Zone</span> 🎮</div>
+
+  <input
+    id="search"
+    type="search"
+    placeholder="Buscar videojuegos..."
+    aria-label="Buscar videojuegos"
+  >
 </header>
+
 <main>
-<section class="hero">
-<h1>Bienvenido a <span class="blue">GameZone</span></h1>
-<p>Descubrí tu próxima aventura.</p>
-<button onclick="document.getElementById('catalog').scrollIntoView()">Ver juegos</button>
-</section>
-<h2>🎮 Juegos destacados</h2>
-<section class="games" id="catalog">
-<article class="game" data-name="aventura espacial">
-<div class="cover">🚀</div>
-<h3>Aventura espacial</h3>
-<p>Explorá nuevos mundos.</p>
-<p class="price">Gratis</p>
-<button onclick="alert('Próximamente agregaremos el enlace oficial del juego.')">Ver juego</button>
-</article>
-<article class="game" data-name="carrera extrema">
-<div class="cover">🏎️</div>
-<h3>Carrera extrema</h3>
-<p>Velocidad y competición.</p>
-<p class="price">Gratis</p>
-<button onclick="alert('Próximamente agregaremos el enlace oficial del juego.')">Ver juego</button>
-</article>
-<article class="game" data-name="mundo pixel">
-<div class="cover">👾</div>
-<h3>Mundo Pixel</h3>
-<p>Una aventura independiente.</p>
-<p class="price">Gratis</p>
-<button onclick="alert('Próximamente agregaremos el enlace oficial del juego.')">Ver juego</button>
-</article>
-</section>
+
+  <section class="hero">
+    <h1>Descubrí tu próxima <span class="highlight">aventura</span></h1>
+    <p>
+      Acción, carreras, estrategia y mucho más.
+      Explorá juegos gratuitos para PC desde un solo lugar.
+    </p>
+    <p>🎮 12 juegos para descubrir · 💙 Siempre buscando nuevas aventuras</p>
+  </section>
+
+  <h2 class="section-title">🔥 Juegos destacados</h2>
+  <p style="color:#aebbd0">
+    Elegí un juego y visitá su página oficial para descargarlo.
+  </p>
+
+  <div class="filters">
+    <select id="category" aria-label="Filtrar por género">
+      <option value="todos">Todos los géneros</option>
+      <option value="accion">Acción y disparos</option>
+      <option value="aventura">Aventura y rol</option>
+      <option value="estrategia">Estrategia</option>
+      <option value="simulacion">Simulación</option>
+      <option value="lucha">Lucha</option>
+      <option value="mmorpg">Mundo online</option>
+    </select>
+  </div>
+
+  <section class="games" id="games">
+
+    <article class="game" data-name="counter strike 2 cs2 disparos competitivo" data-category="accion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg"
+           alt="Portada de Counter-Strike 2" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Acción y disparos</span>
+        <h3>Counter-Strike 2</h3>
+        <p class="description">Combates competitivos por equipos que requieren estrategia y coordinación.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="warframe accion ciencia ficcion" data-category="accion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/230410/header.jpg"
+           alt="Portada de Warframe" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Acción y ciencia ficción</span>
+        <h3>Warframe</h3>
+        <p class="description">Aventuras espaciales, misiones cooperativas y combates futuristas.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/230410/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="dota 2 estrategia fantasia" data-category="estrategia">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg"
+           alt="Portada de Dota 2" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Estrategia</span>
+        <h3>Dota 2</h3>
+        <p class="description">Partidas estratégicas por equipos con héroes y habilidades diferentes.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/570/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="team fortress 2 tf2 comedia accion" data-category="accion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/440/header.jpg"
+           alt="Portada de Team Fortress 2" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Acción por equipos</span>
+        <h3>Team Fortress 2</h3>
+        <p class="description">Un juego multijugador con personajes y estilos de combate variados.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/440/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="brawlhalla lucha plataformas" data-category="lucha">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/291550/header.jpg"
+           alt="Portada de Brawlhalla" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Lucha</span>
+        <h3>Brawlhalla</h3>
+        <p class="description">Combates de plataformas con personajes y partidas multijugador.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/291550/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="the sims 4 sims simulacion casas" data-category="simulacion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/1222670/header.jpg"
+           alt="Portada de The Sims 4" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Simulación</span>
+        <h3>The Sims 4</h3>
+        <p class="description">Creá personajes, construí casas y diseñá historias propias.</p>
+        <p class="price">Juego base gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/1222670/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="pubg battlegrounds supervivencia disparos" data-category="accion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg"
+           alt="Portada de PUBG Battlegrounds" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Supervivencia y acción</span>
+        <h3>PUBG: Battlegrounds</h3>
+        <p class="description">Competí para sobrevivir en un campo de batalla multijugador.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/578080/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="apex legends accion heroes" data-category="accion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg"
+           alt="Portada de Apex Legends" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Acción y equipos</span>
+        <h3>Apex Legends</h3>
+        <p class="description">Un juego competitivo con héroes que tienen habilidades únicas.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/1172470/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="destiny 2 aventura ciencia ficcion" data-category="aventura">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/1085660/header.jpg"
+           alt="Portada de Destiny 2" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Aventura y acción</span>
+        <h3>Destiny 2</h3>
+        <p class="description">Explorá mundos de ciencia ficción y completá misiones con otros jugadores.</p>
+        <p class="price">Gratis para empezar</p>
+        <a class="button" href="https://store.steampowered.com/app/1085660/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="path of exile rol fantasia" data-category="aventura">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/238960/header.jpg"
+           alt="Portada de Path of Exile" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Rol y fantasía</span>
+        <h3>Path of Exile</h3>
+        <p class="description">Explorá un mundo de fantasía, mejorá tu personaje y buscá equipamiento.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/238960/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="war thunder aviones tanques simulacion" data-category="simulacion">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/236390/header.jpg"
+           alt="Portada de War Thunder" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Simulación y vehículos</span>
+        <h3>War Thunder</h3>
+        <p class="description">Controlá vehículos terrestres, barcos y aviones en batallas online.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/236390/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+    <article class="game" data-name="albion online mundo abierto rol" data-category="mmorpg">
+      <img src="https://cdn.akamai.steamstatic.com/steam/apps/761890/header.jpg"
+           alt="Portada de Albion Online" loading="lazy">
+      <div class="game-content">
+        <span class="genre">Mundo online</span>
+        <h3>Albion Online</h3>
+        <p class="description">Explorá un mundo de fantasía, fabricá objetos y jugá con otras personas.</p>
+        <p class="price">Gratis</p>
+        <a class="button" href="https://store.steampowered.com/app/761890/" target="_blank" rel="noopener noreferrer">Ver en Steam ↗</a>
+      </div>
+    </article>
+
+  </section>
+
+  <p class="no-results" id="noResults">
+    No encontramos juegos con esa búsqueda. Probá con otro nombre o género.
+  </p>
+
 </main>
-<footer>GameZone © 2026 · Tu tienda de videojuegos</footer>
+
+<footer>
+  <strong>GameZone 🎮</strong><br>
+  Tu tienda para descubrir videojuegos de PC.<br>
+  GameZone es un catálogo independiente y no está afiliado a Steam.<br>
+  Los juegos pertenecen a sus respectivos creadores y distribuidores.
+</footer>
+
 <script>
-document.getElementById('search').addEventListener('input',function(){
-let q=this.value.toLowerCase();
-document.querySelectorAll('.game').forEach(g=>{
-g.style.display=g.dataset.name.includes(q)?'':'none';
-});
-});
+const search = document.getElementById("search");
+const category = document.getElementById("category");
+const cards = document.querySelectorAll(".game");
+const noResults = document.getElementById("noResults");
+
+function filterGames() {
+  const query = search.value.toLowerCase().trim();
+  const selectedCategory = category.value;
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchesText = card.dataset.name.includes(query);
+    const matchesCategory =
+      selectedCategory === "todos" ||
+      card.dataset.category === selectedCategory;
+
+    const show = matchesText && matchesCategory;
+    card.style.display = show ? "" : "none";
+
+    if (show) visible++;
+  });
+
+  noResults.style.display = visible === 0 ? "block" : "none";
+}
+
+search.addEventListener("input", filterGames);
+category.addEventListener("change", filterGames);
 </script>
+
 </body>
 </html>
