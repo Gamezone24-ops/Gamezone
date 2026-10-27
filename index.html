@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameZone | Tu tienda de videojuegos</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #0b0d12;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 22px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #252b38;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .logo span { color: #08c9ff; }
+
+    input {
+      padding: 12px;
+      border: 1px solid #343c4c;
+      border-radius: 8px;
+      background: #171b25;
+      color: white;
+      width: 240px;
+      max-width: 100%;
+    }
+
+    main { padding: 35px 7%; }
+
+    .hero {
+      padding: 40px 25px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #102b50, #10131d);
+      border: 1px solid #174b78;
+    }
+
+    h1 { font-size: 36px; margin-top: 0; }
+    .azul { color: #08c9ff; }
+
+    .juegos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .juego {
+      background: #171b25;
+      border: 1px solid #292f3d;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .portada {
+      height: 110px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #124b79, #182033);
+      display: grid;
+      place-items: center;
+      font-size: 35px;
+    }
+
+    .precio { color: #08c9ff; font-weight: bold; }
+
+    button {
+      background: #087fce;
+      color: white;
+      border: 0;
+      border-radius: 7px;
+      padding: 11px 15px;
+      cursor: pointer;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: #9ca6b8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Game<span>Zone</span> 🎮</div>
+    <input id="buscador" type="search"
+      placeholder="Buscar videojuegos...">
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Tu próximo juego está en <span class="azul">GameZone</span></h1>
+      <p>Descubrí juegos para PC y encontrá tu próxima aventura.</p>
+      <button onclick="document.getElementById('catalogo').scrollIntoView()">
+        Explorar juegos
+      </button>
+    </section>
+
+    <h2>Juegos destacados</h2>
+    <p>Catálogo de ejemplo: agregá juegos autorizados para publicar.</p>
+
+    <section class="juegos" id="catalogo">
+      <article class="juego" data-nombre="aventura espacial">
+        <div class="portada">🚀</div>
+        <h3>Aventura espacial</h3>
+        <p>Explorá nuevos mundos.</p>
+        <p class="precio">Gratis</p>
+        <button onclick="alert('Próximamente: enlace oficial del juego')">
+          Ver juego
+        </button>
+      </article>
+
+      <article class="juego" data-nombre="carrera extrema">
+        <div class="portada">🏎️</div>
+        <h3>Carrera extrema</h3>
+        <p>Velocidad y competición.</p>
+        <p class="precio">Gratis</p>
+        <button onclick="alert('Próximamente: enlace oficial del juego')">
+          Ver juego
+        </button>
+      </article>
+
+      <article class="juego" data-nombre="mundo pixel">
+        <div class="portada">👾</div>
+        <h3>Mundo Pixel</h3>
+        <p>Una aventura independiente.</p>
+        <p class="precio">Gratis</p>
+        <button onclick="alert('Próximamente: enlace oficial del juego')">
+          Ver juego
+        </button>
+      </article>
+    </section>
+  </main>
+
+  <footer>GameZone © 2026 · Tu tienda de videojuegos</footer>
+
+  <script>
+    const buscador = document.getElementById("buscador");
+
+    buscador.addEventListener("input", () => {
+      const texto = buscador.value.toLowerCase();
+
+      document.querySelectorAll(".juego").forEach(juego => {
+        juego.style.display =
+          juego.dataset.nombre.includes(texto) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
